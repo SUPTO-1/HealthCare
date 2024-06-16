@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Providers/AuthProvider";
 import { NavLink, Outlet } from "react-router-dom";
-import { FaRegCalendarCheck } from "react-icons/fa";
+import { FaImages, FaRegCalendarCheck } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 import { GrNotes } from "react-icons/gr";
 import { GiHypodermicTest } from "react-icons/gi";
@@ -36,6 +36,7 @@ const Dashboard = () => {
           <li className="text-sm md:text-xl font-poppins mt-4"> <NavLink className={({ isActive }) => (isActive ? "text-[#3f41ca]" : "")} to='/dashboard/appointments'> <FaRegCalendarCheck className="text-sm md:text-2xl text-[#367f96]" /> Appointments</NavLink> </li>
           <li className="text-sm md:text-xl font-poppins mt-4"> <NavLink className={({ isActive }) => (isActive ? "text-[#3f41ca]" : "")} to='/dashboard/testResults'> <GrNotes className="text-sm md:text-2xl text-[#367f96]" /> Test Results</NavLink> </li>
           <li className="text-sm md:text-xl font-poppins mt-4"> <NavLink className={({ isActive }) => (isActive ? "text-[#3f41ca]" : "")} to='/dashboard/addBanner'> <FaImage className="text-sm md:text-2xl text-[#367f96]" /> Add Banner</NavLink> </li>
+          <li className="text-sm md:text-xl font-poppins mt-4"> <NavLink className={({ isActive }) => (isActive ? "text-[#3f41ca]" : "")} to='/dashboard/bannerList'> <FaImages className="text-sm md:text-2xl text-[#367f96]" /> Banner List</NavLink> </li>
         </ul>
       </div>
       <div className="flex-1">

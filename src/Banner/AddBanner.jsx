@@ -1,7 +1,9 @@
 import Swal from 'sweetalert2';
 import bannerImg from '../assets/images/addbanner.jpg';
+import UseAxiosSecure from '../CustomHook/UseAxiosSecure';
 
 const AddBanner = () => {
+  const axiosSecure = UseAxiosSecure();
   const handleAdd = (e) => {
     e.preventDefault();
     const form = new FormData(e.target);
@@ -14,24 +16,16 @@ const AddBanner = () => {
       image,
     }
     console.log(addBanner);
-    fetch('http://localhost:5000/banner',{
-      method:'POST',
-      headers:{
-        'Content-Type':'application/json'
-      },
-      body:JSON.stringify(addBanner)
-    })
-    .then(res=>res.json())
-    .then(data=>{
-      console.log(data);
-      if(data.insertedId)
+    axiosSecure.post('/banner',addBanner)
+    .then(res=>{
+      if(res.data.insertedId)
         {
           Swal.fire({
-            title: 'success!',
-            text: 'Volunteer post added successfully',
-            icon: 'success',
-            confirmButtonText: 'Okay'
-          })
+            title: "success!",
+            text: "Banner added successfully",
+            icon: "success",
+            confirmButtonText: "Okay",
+          });
         }
     })
   }
