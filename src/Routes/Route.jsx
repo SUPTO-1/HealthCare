@@ -3,6 +3,8 @@ import Root from "../Root/Root";
 import Home from "../Home/Home";
 import Login from "../Authentication/Login";
 import SignUp from "../Authentication/SignUp";
+import Dashboard from "../UserDashBoard/Dashboard";
+import MyProfile from "../UserDashBoard/MyProfile";
 
 const routes = createBrowserRouter([
     {
@@ -20,6 +22,16 @@ const routes = createBrowserRouter([
             {
                 path:'/signup',
                 element:<SignUp></SignUp>
+            },
+            {
+                path:'/dashboard',
+                element:<Dashboard></Dashboard>,
+                children:[
+                    {
+                        path:'myProfile',
+                        element:<MyProfile></MyProfile>
+                    }
+                ]
             }
         ],
     }

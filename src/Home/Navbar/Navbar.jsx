@@ -44,19 +44,11 @@ const Navbar = () => {
       <li className="text-xl">
         <NavLink
           className={({ isActive }) =>
-            isActive ? "border-b-2 border-black" : ""
+            isActive ? "border-b-2 " : ""
           }
           to="/"
         >
           Home
-        </NavLink>
-      </li>
-      <li className="text-xl">
-        <NavLink
-          className={({ isActive }) => (isActive ? "border-b-2" : "")}
-          to="/about"
-        >
-          About
         </NavLink>
       </li>
       <li className="text-xl">
@@ -75,6 +67,26 @@ const Navbar = () => {
           Contact
         </NavLink>
       </li>
+      {
+        user?
+        <li className="text-xl">
+        <NavLink
+          className={({ isActive }) => (isActive ? "border-b-2" : "")}
+          to="/dashboard/myProfile"
+        >
+          Dashboard
+        </NavLink>
+      </li>
+      :
+      <li className="text-xl hidden">
+        <NavLink
+          className={({ isActive }) => (isActive ? "border-b-2" : "")}
+          to="/dashboard"
+        >
+          Dashboard
+        </NavLink>
+      </li>
+      }
     </>
   );
   return (

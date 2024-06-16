@@ -159,9 +159,9 @@ const Login = () => {
           </form>
           <div className="flex justify-center items-center gap-5">
             <button onClick={handleGoogle}><FcGoogle className="text-3xl"></FcGoogle></button>
-            <button onClick={handleGithub}><FaGithub className="text-3xl"></FaGithub></button>
-            <FaFacebook className="text-3xl"></FaFacebook>
-            <FaTwitter className="text-3xl"></FaTwitter>
+            <button onClick={handleGithub}><FaGithub className=" text-3xl"></FaGithub></button>
+            <FaFacebook className="text-[#0866ff] text-3xl"></FaFacebook>
+            <FaTwitter className=" text-[#1da1f2] text-3xl"></FaTwitter>
           </div>
         </div>
       </div>
