@@ -6,6 +6,7 @@ import SignUp from "../Authentication/SignUp";
 import Dashboard from "../UserDashBoard/Dashboard";
 import MyProfile from "../UserDashBoard/MyProfile";
 import AddBanner from "../Banner/AddBanner";
+import BannerList from "../UserDashBoard/BannerList";
 
 const routes = createBrowserRouter([
     {
@@ -35,6 +36,10 @@ const routes = createBrowserRouter([
                     {
                         path:'addBanner',
                         element:<AddBanner></AddBanner>
+                    },
+                    {
+                        path:'bannerList',
+                        element:<BannerList></BannerList>
                     }
                 ]
             }
