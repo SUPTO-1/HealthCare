@@ -1,22 +1,54 @@
 import { useQuery } from "@tanstack/react-query";
 import UseAxiosSecure from "../CustomHook/UseAxiosSecure";
 import { FaTrash } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 const BannerList = () => {
   const axiosSecure = UseAxiosSecure();
-  const { data: banner = [] } = useQuery({
+  const { data: banner = [] , refetch } = useQuery({
     queryKey: ["banner"],
     queryFn: async () => {
       const res = await axiosSecure.get("/banner");
       return res.data;
     },
   });
+  const handleDelete = (singleBanner) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/banner/${singleBanner._id}`)
+        .then(res => {
+          console.log(res);
+          if (res.data.deletedCount > 0) {
+            Swal.fire(
+              "Deleted!",
+              "Banner has been deleted.",
+              "success"
+            );
+            refetch();
+          }
+        });
+      }
+    })
+  }
+  // active and inactive part
+  const handleActiveBanner = (singleBanner) =>{
+    
+  }
   return (
     <div className="px-4">
-      <h2 className="text-2xl text-[#363433] font-medium font-poppins text-center mt-10">
+      <h2 className="text-2xl text-[#363433] font-medium font-poppins text-center my-10">
         All Available Banners
       </h2>
-      <div className="overflow-x-auto">
+     <div className="min-w-screen">
+     <div className="overflow-x-auto">
         <table className="table">
           <thead>
             <tr>
@@ -45,18 +77,16 @@ const BannerList = () => {
                   <td>{singleBanner.bannerName}</td>
                   <td>{singleBanner.title}</td>
                   <td>
-                    <button className="btn btn-ghost btn-xs">
+                    <button onClick={()=>handleDelete(singleBanner)} className="btn btn-ghost btn-xs">
                       {" "}
                       <FaTrash className="text-lg text-red-600"></FaTrash>{" "}
                     </button>
                   </td>
                   <td>
-                    <button
-                      className={`btn btn-sm ${
-                        singleBanner.isActive ? "bg-green-500" : "bg-red-500"
-                      }`}
-                    >
-                      {singleBanner.isActive ? "Active" : "Inactive"}
+                    <button onClick={()=>handleActiveBanner(singleBanner)} className="btn btn-sm bg-green-600">
+                      {
+                        singleBanner.isActive
+                      }
                     </button>
                   </td>
                 </tr>
@@ -65,6 +95,7 @@ const BannerList = () => {
           </tbody>
         </table>
       </div>
+     </div>
     </div>
   );
 };
