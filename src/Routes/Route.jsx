@@ -6,7 +6,7 @@ import SignUp from "../Authentication/SignUp";
 import Dashboard from "../UserDashBoard/Dashboard";
 import MyProfile from "../UserDashBoard/MyProfile";
 import AddBanner from "../Banner/AddBanner";
-import BannerList from "../UserDashBoard/BannerList";
+import BannerList from "../Banner/BannerList";
 
 const routes = createBrowserRouter([
     {
