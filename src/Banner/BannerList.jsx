@@ -40,7 +40,19 @@ const BannerList = () => {
   }
   // active and inactive part
   const handleActiveBanner = (singleBanner) =>{
-    
+    axiosSecure.patch(`/banner/active/${singleBanner._id}`)
+   .then(res =>{
+    if(res.data.modifiedCount>0)
+      {
+        Swal.fire({
+          title: "Success!",
+          text: "Banner has been activated",
+          icon: "success",
+          confirmButtonText: "Okay",
+        });
+        refetch();
+      }
+   } )
   }
   return (
     <div className="px-4">
