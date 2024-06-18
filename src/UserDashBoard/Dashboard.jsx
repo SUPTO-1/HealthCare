@@ -1,11 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Providers/AuthProvider";
 import { NavLink, Outlet } from "react-router-dom";
-import { FaImages, FaRegCalendarCheck } from "react-icons/fa";
+import { FaRegCalendarCheck, FaImages } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 import { GrNotes } from "react-icons/gr";
 import { GiHypodermicTest } from "react-icons/gi";
 import { FaImage } from "react-icons/fa6";
+import { MdAddModerator } from "react-icons/md";
 
 const Dashboard = () => {
   const { user, loading } = useContext(AuthContext);
@@ -21,7 +22,7 @@ const Dashboard = () => {
     return;
   }
   return (
-    <div className="flex">
+    <div className="flex gap-0">
       <div className="bg-[#80B9AD] w-[40%] lg:w-[20%] text-center min-h-screen">
         <div className="avatar pt-10">
           <div className="w-16 md:w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
@@ -37,9 +38,10 @@ const Dashboard = () => {
           <li className="text-sm md:text-xl font-poppins mt-4"> <NavLink className={({ isActive }) => (isActive ? "text-[#3f41ca]" : "")} to='/dashboard/testResults'> <GrNotes className="text-sm md:text-2xl text-[#367f96]" /> Test Results</NavLink> </li>
           <li className="text-sm md:text-xl font-poppins mt-4"> <NavLink className={({ isActive }) => (isActive ? "text-[#3f41ca]" : "")} to='/dashboard/addBanner'> <FaImage className="text-sm md:text-2xl text-[#367f96]" /> Add Banner</NavLink> </li>
           <li className="text-sm md:text-xl font-poppins mt-4"> <NavLink className={({ isActive }) => (isActive ? "text-[#3f41ca]" : "")} to='/dashboard/bannerList'> <FaImages className="text-sm md:text-2xl text-[#367f96]" /> Banner List</NavLink> </li>
+          <li className="text-sm md:text-xl font-poppins mt-4"> <NavLink className={({ isActive }) => (isActive ? "text-[#3f41ca]" : "")} to='/dashboard/addTest'> <MdAddModerator className="text-sm md:text-2xl text-[#367f96]" /> Add Test</NavLink> </li>
         </ul>
       </div>
-      <div className="flex-1">
+      <div className="flex-1 p-0">
         <Outlet></Outlet>
       </div>
     </div>

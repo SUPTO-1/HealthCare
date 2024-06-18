@@ -155,7 +155,7 @@ const Navbar = () => {
             </div>
           </div>
           <Link onClick={handleLogOut}>
-            <a className="btn w-[80px] md:w-[100px]">Logout</a>
+            <a className="btn w-[80px] md:w-[100px] bg-[#7AB2B2] shadow-xl border-0">Logout</a>
           </Link>
         </div>)
         }
