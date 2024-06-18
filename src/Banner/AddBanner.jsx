@@ -47,7 +47,7 @@ const AddBanner = () => {
             className="object-cover w-full h-full"
           />
         </div>
-        <div className="w-full lg:w-1/2 p-6 md:p-10 lg:p-20">
+        <div className="w-full lg:w-1/2 p-6 md:p-10 lg:p-12">
           <h2 className="text-xl md:text-3xl font-semibold font-poppins mb-8 text-gray-800">
             Add Banner
           </h2>

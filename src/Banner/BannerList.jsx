@@ -95,11 +95,24 @@ const BannerList = () => {
                     </button>
                   </td>
                   <td>
-                    <button onClick={()=>handleActiveBanner(singleBanner)} className="btn btn-sm bg-green-600">
+                    {
+                      singleBanner.isActive=='true'?
+                     <>
+                      <button onClick={()=>handleActiveBanner(singleBanner)} className="btn btn-sm bg-green-600">
                       {
                         singleBanner.isActive
                       }
                     </button>
+                     </>
+                    :
+                    <>
+                    <button onClick={()=>handleActiveBanner(singleBanner)} className="btn btn-sm bg-orange-600">
+                      {
+                        singleBanner.isActive
+                      }
+                    </button>
+                    </>
+                    }
                   </td>
                 </tr>
               );
