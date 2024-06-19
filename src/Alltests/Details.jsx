@@ -17,14 +17,14 @@ const Details = () => {
             <div className="grid flex-grow h-32 text-3xl font-roboto font-semibold text-[#FFF] card rounded-box bg-[#559797] place-items-center">
               Test Details
             </div>
-            <div className=" md:divider-horizontal w-full border-white bg-white border-[10px]"></div>
+            <div className="lg:divider-horizontal w-full border-white bg-white border-[10px]"></div>
             <div className="grid flex-grow h-32 card text-[#FFF] font-medium bg-[#559797] text-2xl font-poppins rounded-box place-items-center">
               Your Health Is Our Responsibility
             </div>
           </div>
         </div>
       </div>
-      <div className="px-40 flex gap-20">
+      <div className="px-3 md:px-6 lg:px-40 lg:flex gap-20">
         <div className="lg:w-3/5">
           <h2 className="text-[#799f4a] text-2xl font-roboto mb-6">
             Our Test Details
@@ -60,7 +60,7 @@ const Details = () => {
             centers provide comprehensive services in one location, offering
             convenience and streamlined care for patients.
           </p>
-          <div className="flex gap-4 mb-10">
+          <div className="md:flex gap-4 mb-10">
             <div>
               <div className="bg-[#f2f2f2] p-8 mb-5">
                 <h2 className="text-xl font-roboto font-medium mb-2">
@@ -160,7 +160,7 @@ const Details = () => {
           </section>
         </div>
         {/* second div */}
-        <div className="w-2/5">
+        <div className="lg:w-2/5">
           <div className="bg-[#799f4a] px-10 py-10 mb-6">
            <div className="flex justify-between mb-4">
            <h2 className="text-2xl font-poppins font-bold text-white">
