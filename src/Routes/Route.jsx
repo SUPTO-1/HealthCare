@@ -9,6 +9,7 @@ import AddBanner from "../Banner/AddBanner";
 import BannerList from "../Banner/BannerList";
 import AllTests from "../Alltests/AllTests";
 import AddTest from "../Alltests/AddTest";
+import Details from "../Alltests/Details";
 
 const routes = createBrowserRouter([
     {
@@ -30,6 +31,11 @@ const routes = createBrowserRouter([
             {
                 path:'/allTests',
                 element:<AllTests></AllTests>
+            },
+            {
+                path:'/details/:id',
+                element:<Details></Details>,
+                loader:({params})=>fetch(`http://localhost:5000/test/${params.id}`)
             },
             {
                 path:'dashboard',
