@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import UseAxiosPublic from "../CustomHook/UseAxiosPublic";
 import { FaEdit, FaTrash } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const AllTestTable = () => {
   const axiosPublic = UseAxiosPublic();
@@ -48,6 +49,7 @@ const AllTestTable = () => {
                     <td>{test.testFee}</td>
                     <td> {test.slot} </td>
                     <td>
+                      <Link to={`/dashboard/editTest/${test._id}`}>
                       <button
                        
                         className="btn btn-ghost btn-xs"
@@ -55,6 +57,7 @@ const AllTestTable = () => {
                         {" "}
                         <FaEdit className="text-lg text-red-600"></FaEdit>{" "}
                       </button>
+                      </Link>
                     </td>
                     <td>
                     <button
