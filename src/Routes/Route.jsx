@@ -12,6 +12,7 @@ import AddTest from "../Alltests/AddTest";
 import Details from "../Alltests/Details";
 import AllTestTable from "../Alltests/AllTestTable";
 import EditTest from "../Alltests/EditTest";
+import Recommendation from "../Recommendation/Recommendation";
 
 const routes = createBrowserRouter([
     {
@@ -67,6 +68,10 @@ const routes = createBrowserRouter([
                         path:'editTest/:id',
                         element:<EditTest></EditTest>,
                         loader:({params})=>fetch(`http://localhost:5000/test/${params.id}`)
+                    },
+                    {
+                        path:'recommendation',
+                        element:<Recommendation></Recommendation>
                     }
                 ]
             }
