@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { FaFacebook, FaGithub, FaTwitter } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../Providers/AuthProvider";
 import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
@@ -10,6 +10,9 @@ const Login = () => {
   const { logIn, googleSignIn, githubSignIn } = useContext(AuthContext);
   const googleProvider = new GoogleAuthProvider();
   const githubProvider = new GithubAuthProvider();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
   const handleLogin = (e) => {
     e.preventDefault();
     const form = new FormData(e.target);
@@ -26,6 +29,7 @@ const Login = () => {
           icon: "success",
           confirmButtonText: "Okay",
         });
+        navigate(from, {replace:true} );
       })
       .catch((error) => {
         console.log(error);
@@ -158,8 +162,8 @@ const Login = () => {
             </div>
           </form>
           <div className="flex justify-center items-center gap-5">
-            <button onClick={handleGoogle}><FcGoogle className="text-3xl"></FcGoogle></button>
-            <button onClick={handleGithub}><FaGithub className=" text-3xl"></FaGithub></button>
+            <button disabled onClick={handleGoogle}><FcGoogle className="text-3xl"></FcGoogle></button>
+            <button disabled onClick={handleGithub}><FaGithub className=" text-3xl"></FaGithub></button>
             <FaFacebook className="text-[#0866ff] text-3xl"></FaFacebook>
             <FaTwitter className=" text-[#1da1f2] text-3xl"></FaTwitter>
           </div>

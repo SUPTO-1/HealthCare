@@ -3,22 +3,29 @@ import logo from "../../assets/images/logo.png";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Swal from "sweetalert2";
+import UseAxiosPublic from "../../CustomHook/UseAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
 const Navbar = () => {
   const { user, logOut, loading } = useContext(AuthContext);
-  const [displayName, setDisplayName] = useState("");
-  const [photoURL, setPhotoURL] = useState("");
-  useEffect(() => {
-    if (user) {
-      setDisplayName(user.displayName);
-      setPhotoURL(user.photoURL);
-    } else {
-      setDisplayName("");
-      setPhotoURL("");
-    }
-  }, [user]);
+  const axiosPublic = UseAxiosPublic();
+
+  const { data: single = [] } = useQuery({
+    queryKey: ["user", user?.email],
+    queryFn: async () => {
+      if (user) {
+        const res = await axiosPublic.get(`/user/${user.email}`);
+        return res.data;
+      }
+      return [];
+    },
+    enabled: !!user,
+  });
   if (loading) {
     return <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin dark:border-[#559797] text-center flex justify-center items-center mx-auto mb-10 mt-24"></div>;
   }
+
+
+  // TanStack 
   const handleLogOut = () => {
     logOut()
       .then(() => {
@@ -147,10 +154,10 @@ const Navbar = () => {
               tabIndex={0}
               role="button"
               className="btn btn-ghost btn-circle avatar tooltip tooltip-bottom"
-              data-tip={displayName}
+              data-tip={single.name}
             >
               <div className="w-10 rounded-full">
-                <img alt="" src={photoURL} />
+                <img alt="" src={single.photo} />
               </div>
             </div>
           </div>

@@ -13,6 +13,7 @@ import Details from "../Alltests/Details";
 import AllTestTable from "../Alltests/AllTestTable";
 import EditTest from "../Alltests/EditTest";
 import Recommendation from "../Recommendation/Recommendation";
+import PrivateRoute from "./PrivateRoute";
 
 const routes = createBrowserRouter([
     {
@@ -37,12 +38,12 @@ const routes = createBrowserRouter([
             },
             {
                 path:'/details/:id',
-                element:<Details></Details>,
+                element:<PrivateRoute><Details></Details></PrivateRoute>   ,
                 loader:({params})=>fetch(`http://localhost:5000/test/${params.id}`)
             },
             {
                 path:'dashboard',
-                element:<Dashboard></Dashboard>,
+                element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
                 children:[
                     {
                         path:'myProfile',

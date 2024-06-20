@@ -1,11 +1,14 @@
 import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProvider";
 import Swal from "sweetalert2";
+import UseAxiosPublic from "../CustomHook/UseAxiosPublic";
 
 const SignUp = () => {
+  const axiosPublic = UseAxiosPublic();
   const [districts , setDistricts] = useState([]);
   const [upazilas, setUpazilas] = useState([]);
+  const navigate = useNavigate();
   useEffect(()=>{
     fetch('district.json')
      .then(res => res.json())
@@ -26,6 +29,9 @@ const SignUp = () => {
     const name = formData.get("name");
     const photo = formData.get("photo");
     const confirmPassword = formData.get("confirmPassword");
+    const bloodGroup = formData.get("bloodGroup");
+    const district = formData.get("district");
+    const upazila = formData.get("upazila");
     // password validation here
     const passwordCheckerUpper = /^(?=.*[A-Z]).*$/;
     const passwordCheckerLower = /^(?=.*[a-z]).*$/;
@@ -68,15 +74,31 @@ const SignUp = () => {
 
     //Authentication here
     createUser(email, password, name, photo)
-      .then((result) => {
-        const loggedUser = result.user;
-        console.log(loggedUser);
-        Swal.fire({
-          title: "success!",
-          text: "User SignUp successfully",
-          icon: "success",
-          confirmButtonText: "Okay",
-        });
+      .then(() => {
+        //const loggedUser = result.user;
+        //console.log(loggedUser);
+        const userInfo = {
+          name: name,
+          email: email,
+          photo: photo, 
+          bloodGroup: bloodGroup,
+          district: district,
+          upazila: upazila,
+        }
+        axiosPublic.post('/user',userInfo)
+        .then(res=>{
+          if(res.data.insertedId)
+            {
+              e.target.reset();
+              Swal.fire({
+                title: "success!",
+                text: "User Created successfully",
+                icon: "success",
+                confirmButtonText: "Okay",
+              });
+              navigate('/');
+            }
+        })
       })
       .catch((error) => {
         console.log(error);
@@ -210,7 +232,7 @@ const SignUp = () => {
               <label className="label">
                 <span className="label-text text-xl md:text-white">Blood Group</span>
               </label>
-            <select className="select select-bordered w-full text-xl">
+            <select name="bloodGroup" className="select select-bordered w-full text-xl">
               <option disabled selected>
                 Blood Group
               </option>
@@ -228,7 +250,7 @@ const SignUp = () => {
             <label className="label">
                 <span className="label-text text-xl md:text-white">District</span>
               </label>
-            <select className="select select-bordered w-full text-xl">
+            <select name="district" className="select select-bordered w-full text-xl">
               <option disabled selected>
                 Select Your District
               </option>
@@ -243,7 +265,7 @@ const SignUp = () => {
             <label className="label">
                 <span className="label-text text-xl md:text-white">Upazila</span>
               </label>
-            <select className="select select-bordered w-full text-xl">
+            <select name="upazila" className="select select-bordered w-full text-xl">
               <option disabled selected>
                 Select Your Upazila
               </option>
