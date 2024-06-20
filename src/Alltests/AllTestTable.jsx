@@ -2,16 +2,42 @@ import { useQuery } from "@tanstack/react-query";
 import UseAxiosPublic from "../CustomHook/UseAxiosPublic";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+import UseAxiosSecure from '../CustomHook/UseAxiosSecure';
 
 const AllTestTable = () => {
   const axiosPublic = UseAxiosPublic();
-  const { data: tests = [] } = useQuery({
+  const axiosSecure = UseAxiosSecure();
+  const { data: tests = [] , refetch } = useQuery({
     queryKey: ["tests"],
     queryFn: async () => {
       const res = await axiosPublic.get("/test");
       return res.data;
     },
   });
+  const handleDelete = (test) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res = await axiosSecure.delete(`/test/${test._id}`);
+        if (res.data.deletedCount > 0) {
+            refetch();
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success",
+          });
+        }
+      }
+    });
+  };
   return (
     <div className="md:px-4">
       <h2 className="text-2xl text-[#363433] font-medium font-poppins text-center my-10">
@@ -60,7 +86,7 @@ const AllTestTable = () => {
                       </Link>
                     </td>
                     <td>
-                    <button
+                    <button onClick={()=> handleDelete(test)}
                        
                        className="btn btn-ghost btn-xs"
                      >
