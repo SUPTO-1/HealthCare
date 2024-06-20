@@ -85,7 +85,7 @@ const Recommendation = () => {
               </div>
               <textarea
                 className="textarea textarea-bordered h-24 text-base focus:outline-none"
-                name="Recommendation"
+                name="recommendation"
                 placeholder="Recommendation"
               ></textarea>
             </label>
