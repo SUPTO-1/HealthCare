@@ -1,6 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
-import { useContext, useEffect, useState } from "react";
+import { useContext, } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Swal from "sweetalert2";
 import UseAxiosPublic from "../../CustomHook/UseAxiosPublic";
@@ -18,7 +18,6 @@ const Navbar = () => {
       }
       return [];
     },
-    enabled: !!user,
   });
   if (loading) {
     return <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin dark:border-[#559797] text-center flex justify-center items-center mx-auto mb-10 mt-24"></div>;
