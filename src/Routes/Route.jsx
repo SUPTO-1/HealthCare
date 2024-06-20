@@ -10,6 +10,7 @@ import BannerList from "../Banner/BannerList";
 import AllTests from "../Alltests/AllTests";
 import AddTest from "../Alltests/AddTest";
 import Details from "../Alltests/Details";
+import AllTestTable from "../Alltests/AllTestTable";
 
 const routes = createBrowserRouter([
     {
@@ -56,6 +57,10 @@ const routes = createBrowserRouter([
                     {
                         path:'addTest',
                         element:<AddTest></AddTest>
+                    },
+                    {
+                        path:'allTestAdmin',
+                        element:<AllTestTable></AllTestTable>
                     }
                 ]
             }

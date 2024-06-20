@@ -55,7 +55,7 @@ const BannerList = () => {
    } )
   }
   return (
-    <div className="px-4">
+    <div className="md:px-4">
       <h2 className="text-2xl text-[#363433] font-medium font-poppins text-center my-10">
         All Available Banners
       </h2>

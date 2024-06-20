@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import UseAxiosPublic from "../CustomHook/UseAxiosPublic";
 import TestCard from "./TestCard";
 import banner from "../assets/images/alltestBanner.jpg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const AllTests = () => {
   const axiosPublic = UseAxiosPublic();
@@ -13,7 +13,10 @@ const AllTests = () => {
       return res.data;
     },
   });
-  const [filterSearch , setFilterSearch] = useState(tests);
+  const [filterSearch , setFilterSearch] = useState([]);
+  useEffect(() => {
+    setFilterSearch(tests);
+  }, [tests]);
   const handleSearch = (e) =>
     {
       e.preventDefault();
