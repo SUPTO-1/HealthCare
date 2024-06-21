@@ -3,7 +3,7 @@ import UseAxiosSecure from "../CustomHook/UseAxiosSecure";
 import { FaTrash } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
-
+import { jsPDF } from "jspdf";
 const UserList = () => {
   const axiosSecure = UseAxiosSecure();
   const { data: user = [], refetch } = useQuery({
@@ -36,6 +36,30 @@ const UserList = () => {
         });
       }
     });
+  };
+  const handleDownloadPdf = (single) => {
+    const doc = new jsPDF();
+    let yPos = 15;
+    doc.setFontSize(20);
+    doc.text(`User Information - ${single.name}`, 15, yPos);
+    yPos += 10;
+    doc.setFontSize(14);
+    doc.text(`Name: ${single.name}`, 15, yPos);
+    yPos += 10;
+    doc.text(`Email: ${single.email}`, 15, yPos);
+    yPos += 10;
+    doc.text(`District: ${single.district}`, 15, yPos);
+    yPos += 10;
+    doc.text(`Upazila: ${single.upazila}`, 15, yPos);
+    yPos += 10;
+    doc.text(`Blood Group: ${single.bloodGroup}`, 15, yPos);
+    yPos += 10;
+    if (single.photo) {
+      doc.text(`Photo:`, 15, yPos);
+      doc.addImage(single.photo, "JPEG", 15, yPos + 5, 50, 50);
+    }
+
+    doc.save(`${single.name}_info.pdf`);
   };
   return (
     <div className="md:px-4">
@@ -74,7 +98,11 @@ const UserList = () => {
                     <td>{single.name}</td>
                     <td>{single.email}</td>
                     <td>
-                      <Link to={`/dashboard/singleUser/${single._id}`}><button className="btn btn-ghost btn-xs">Details</button></Link>
+                      <Link to={`/dashboard/singleUser/${single._id}`}>
+                        <button className="btn btn-ghost btn-xs">
+                          Details
+                        </button>
+                      </Link>
                     </td>
                     <td>
                       {single.role === "admin" ? (
@@ -95,7 +123,12 @@ const UserList = () => {
                       </button>
                     </td>
                     <td>
-                      <button className="btn btn-ghost btn-xs">Download</button>
+                      <button
+                        onClick={() => handleDownloadPdf(single)}
+                        className="btn btn-ghost btn-xs"
+                      >
+                        Download
+                      </button>
                     </td>
                   </tr>
                 );

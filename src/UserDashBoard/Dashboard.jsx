@@ -8,12 +8,26 @@ import { GiHypodermicTest } from "react-icons/gi";
 import { FaImage, FaUsers } from "react-icons/fa6";
 import { MdAddModerator } from "react-icons/md";
 import UseAdmin from "../CustomHook/UseAdmin";
+import UseAxiosPublic from "../CustomHook/UseAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
 
 const Dashboard = () => {
   const { user, loading } = useContext(AuthContext);
   const [displayName, setDisplayName] = useState("");
   const [photoURL, setPhotoURL] = useState("");
   const [isAdmin] = UseAdmin();
+  const axiosPublic = UseAxiosPublic();
+
+  const { data: single = [] } = useQuery({
+    queryKey: ["user", user?.email],
+    queryFn: async () => {
+      if (user) {
+        const res = await axiosPublic.get(`/user/${user.email}`);
+        return res.data;
+      }
+      return [];
+    },
+  });
   useEffect(() => {
     if (user) {
       setDisplayName(user?.displayName);
@@ -28,10 +42,10 @@ const Dashboard = () => {
       <div className="bg-[#80B9AD] w-[40%] lg:w-[20%] text-center min-h-screen">
         <div className="avatar pt-10">
           <div className="w-16 md:w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-            <img src={photoURL} />
+            <img src={single.photo} />
           </div>
         </div>
-        <h2 className="text-sm md:text-xl font-montserrat mt-4 font-medium">{displayName}</h2>
+        <h2 className="text-sm md:text-xl font-montserrat mt-4 font-medium">{single.name}</h2>
         <div className="divider"></div>
         <ul className="menu pl-0 ml-0">
          {
