@@ -17,6 +17,7 @@ import PrivateRoute from "./PrivateRoute";
 import UserList from "../AllUsers/UserList";
 import AdminRoute from "./AdminRoute";
 import SingleUser from "../AllUsers/SingleUser";
+import Appointments from "../UserDashBoard/Appointments";
 
 const routes = createBrowserRouter([
     {
@@ -85,6 +86,10 @@ const routes = createBrowserRouter([
                         path:'singleUser/:id',
                         element:<AdminRoute><SingleUser></SingleUser></AdminRoute>,
                         loader:({params})=>fetch(`http://localhost:5000/user/singleUser/${params.id}`)
+                    },
+                    {
+                        path:'appointments',
+                        element:<Appointments></Appointments>
                     }
                 ]
             }
