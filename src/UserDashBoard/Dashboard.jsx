@@ -5,13 +5,15 @@ import { FaRegCalendarCheck, FaImages, FaBars } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 import { GrNotes } from "react-icons/gr";
 import { GiHypodermicTest } from "react-icons/gi";
-import { FaImage } from "react-icons/fa6";
+import { FaImage, FaUsers } from "react-icons/fa6";
 import { MdAddModerator } from "react-icons/md";
+import UseAdmin from "../CustomHook/UseAdmin";
 
 const Dashboard = () => {
   const { user, loading } = useContext(AuthContext);
   const [displayName, setDisplayName] = useState("");
   const [photoURL, setPhotoURL] = useState("");
+  const [isAdmin] = UseAdmin();
   useEffect(() => {
     if (user) {
       setDisplayName(user?.displayName);
@@ -32,7 +34,10 @@ const Dashboard = () => {
         <h2 className="text-sm md:text-xl font-montserrat mt-4 font-medium">{displayName}</h2>
         <div className="divider"></div>
         <ul className="menu pl-0 ml-0">
-          <li className="text-sm md:text-xl font-poppins"><NavLink className={({ isActive }) => (isActive ? "text-[#3f41ca]" : "")} to='/dashboard/myProfile'> <CgProfile className="text-sm md:text-2xl text-[#367f96]"></CgProfile>  My Profile</NavLink></li>
+         {
+          isAdmin?
+          <>
+           <li className="text-sm md:text-xl font-poppins"><NavLink className={({ isActive }) => (isActive ? "text-[#3f41ca]" : "")} to='/dashboard/myProfile'> <CgProfile className="text-sm md:text-2xl text-[#367f96]"></CgProfile>  My Profile</NavLink></li>
           <li className="text-sm md:text-xl font-poppins mt-4"><NavLink className={({ isActive }) => (isActive ? "text-[#3f41ca]" : "")} to='/dashboard/takeAppointment'> <GiHypodermicTest className="text-sm md:text-2xl text-[#367f96]"/>  Take Appointment</NavLink></li>
           <li className="text-sm md:text-xl font-poppins mt-4"> <NavLink className={({ isActive }) => (isActive ? "text-[#3f41ca]" : "")} to='/dashboard/appointments'> <FaRegCalendarCheck className="text-sm md:text-2xl text-[#367f96]" /> Appointments</NavLink> </li>
           <li className="text-sm md:text-xl font-poppins mt-4"> <NavLink className={({ isActive }) => (isActive ? "text-[#3f41ca]" : "")} to='/dashboard/testResults'> <GrNotes className="text-sm md:text-2xl text-[#367f96]" /> Test Results</NavLink> </li>
@@ -41,6 +46,16 @@ const Dashboard = () => {
           <li className="text-sm md:text-xl font-poppins mt-4"> <NavLink className={({ isActive }) => (isActive ? "text-[#3f41ca]" : "")} to='/dashboard/addTest'> <MdAddModerator className="text-sm md:text-2xl text-[#367f96]" /> Add Test</NavLink> </li>
           <li className="text-sm md:text-xl font-poppins mt-4"> <NavLink className={({ isActive }) => (isActive ? "text-[#3f41ca]" : "")} to='/dashboard/allTestAdmin'> <FaBars className="text-sm md:text-2xl text-[#367f96]" /> All Test</NavLink> </li>
           <li className="text-sm md:text-xl font-poppins mt-4"> <NavLink className={({ isActive }) => (isActive ? "text-[#3f41ca]" : "")} to='/dashboard/recommendation'> <MdAddModerator className="text-sm md:text-2xl text-[#367f96]" />Add Recommendation</NavLink> </li>
+          <li className="text-sm md:text-xl font-poppins mt-4"> <NavLink className={({ isActive }) => (isActive ? "text-[#3f41ca]" : "")} to='/dashboard/userList'> <FaUsers className="text-sm md:text-2xl text-[#367f96]" />User List</NavLink> </li>
+          </>
+          :
+          <>
+          <li className="text-sm md:text-xl font-poppins"><NavLink className={({ isActive }) => (isActive ? "text-[#3f41ca]" : "")} to='/dashboard/myProfile'> <CgProfile className="text-sm md:text-2xl text-[#367f96]"></CgProfile>  My Profile</NavLink></li>
+          <li className="text-sm md:text-xl font-poppins mt-4"><NavLink className={({ isActive }) => (isActive ? "text-[#3f41ca]" : "")} to='/dashboard/takeAppointment'> <GiHypodermicTest className="text-sm md:text-2xl text-[#367f96]"/>  Take Appointment</NavLink></li>
+          <li className="text-sm md:text-xl font-poppins mt-4"> <NavLink className={({ isActive }) => (isActive ? "text-[#3f41ca]" : "")} to='/dashboard/appointments'> <FaRegCalendarCheck className="text-sm md:text-2xl text-[#367f96]" /> Appointments</NavLink> </li>
+          <li className="text-sm md:text-xl font-poppins mt-4"> <NavLink className={({ isActive }) => (isActive ? "text-[#3f41ca]" : "")} to='/dashboard/testResults'> <GrNotes className="text-sm md:text-2xl text-[#367f96]" /> Test Results</NavLink> </li>
+          </>
+         }
         </ul>
       </div>
       <div className="flex-1 p-0">

@@ -14,6 +14,8 @@ import AllTestTable from "../Alltests/AllTestTable";
 import EditTest from "../Alltests/EditTest";
 import Recommendation from "../Recommendation/Recommendation";
 import PrivateRoute from "./PrivateRoute";
+import UserList from "../AllUsers/UserList";
+import AdminRoute from "./AdminRoute";
 
 const routes = createBrowserRouter([
     {
@@ -51,28 +53,32 @@ const routes = createBrowserRouter([
                     },
                     {
                         path:'addBanner',
-                        element:<AddBanner></AddBanner>
+                        element:<AdminRoute><AddBanner></AddBanner></AdminRoute>
                     },
                     {
                         path:'bannerList',
-                        element:<BannerList></BannerList>
+                        element:<AdminRoute><BannerList></BannerList></AdminRoute>
                     },
                     {
                         path:'addTest',
-                        element:<AddTest></AddTest>
+                        element:<AdminRoute><AddTest></AddTest></AdminRoute>
                     },
                     {
                         path:'allTestAdmin',
-                        element:<AllTestTable></AllTestTable>
+                        element:<AdminRoute><AllTestTable></AllTestTable></AdminRoute>
                     },
                     {
                         path:'editTest/:id',
-                        element:<EditTest></EditTest>,
+                        element:<AdminRoute><EditTest></EditTest></AdminRoute>,
                         loader:({params})=>fetch(`http://localhost:5000/test/${params.id}`)
                     },
                     {
                         path:'recommendation',
-                        element:<Recommendation></Recommendation>
+                        element:<AdminRoute><Recommendation></Recommendation></AdminRoute>
+                    },
+                    {
+                        path:'userList',
+                        element:<AdminRoute><UserList></UserList></AdminRoute>
                     }
                 ]
             }
