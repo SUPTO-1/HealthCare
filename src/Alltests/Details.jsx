@@ -3,9 +3,37 @@ import banner from "../assets/images/operation.jpg";
 import { FaCheckToSlot, FaUserDoctor } from "react-icons/fa6";
 import { MdDateRange } from "react-icons/md";
 import { IoMdCheckmark } from "react-icons/io";
+import { useContext } from "react";
+import { AuthContext } from "../Providers/AuthProvider";
+import UseAxiosSecure from "../CustomHook/UseAxiosSecure";
+import Swal from "sweetalert2";
 const Details = () => {
+  const {user} = useContext(AuthContext);
   const singleTest = useLoaderData();
+  const axiosSecure = UseAxiosSecure();
   const { testName, description, image, testFee, slot, date } = singleTest;
+  const handleAddReservation = () =>
+    {
+      const addReservation =
+      {
+        testName: singleTest.testName,
+        date: singleTest.date,
+        image: singleTest.image,
+        email: user.email
+      }
+      axiosSecure.post('/reservation',addReservation)
+      .then(res=>{
+        if(res.data.insertedId)
+            {
+                Swal.fire({
+                    title: "Success!",
+                    text: "Appointment Taken successfully",
+                    icon: "success",
+                    confirmButtonText: "Okay",
+                  });
+            }
+    })
+    }
   return (
     <div>
       <div>
@@ -221,7 +249,7 @@ const Details = () => {
             <p className="text-lg font-montserrat mb-6 ">
             Proceed to payment by selecting your preferred method, including credit cards, debit cards, electronic transfers, or cash for seamless transaction completion at our diagnostic center.
             </p>
-            <button className="px-8 py-3 text-lg text-white font-semibold rounded bg-[#27201d] hover:bg-[#799f4a]">Pay Now</button>
+            <button onClick={()=>handleAddReservation()} className="px-8 py-3 text-lg text-white font-semibold rounded bg-[#27201d] hover:bg-[#799f4a]">Pay Now</button>
           </div>
           
         </div>

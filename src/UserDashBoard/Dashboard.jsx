@@ -52,7 +52,6 @@ const Dashboard = () => {
           isAdmin?
           <>
            <li className="text-sm md:text-xl font-poppins"><NavLink className={({ isActive }) => (isActive ? "text-[#3f41ca]" : "")} to='/dashboard/myProfile'> <CgProfile className="text-sm md:text-2xl text-[#367f96]"></CgProfile>  My Profile</NavLink></li>
-          <li className="text-sm md:text-xl font-poppins mt-4"><NavLink className={({ isActive }) => (isActive ? "text-[#3f41ca]" : "")} to='/dashboard/takeAppointment'> <GiHypodermicTest className="text-sm md:text-2xl text-[#367f96]"/>  Take Appointment</NavLink></li>
           <li className="text-sm md:text-xl font-poppins mt-4"> <NavLink className={({ isActive }) => (isActive ? "text-[#3f41ca]" : "")} to='/dashboard/appointments'> <FaRegCalendarCheck className="text-sm md:text-2xl text-[#367f96]" /> Appointments</NavLink> </li>
           <li className="text-sm md:text-xl font-poppins mt-4"> <NavLink className={({ isActive }) => (isActive ? "text-[#3f41ca]" : "")} to='/dashboard/testResults'> <GrNotes className="text-sm md:text-2xl text-[#367f96]" /> Test Results</NavLink> </li>
           <li className="text-sm md:text-xl font-poppins mt-4"> <NavLink className={({ isActive }) => (isActive ? "text-[#3f41ca]" : "")} to='/dashboard/addBanner'> <FaImage className="text-sm md:text-2xl text-[#367f96]" /> Add Banner</NavLink> </li>
