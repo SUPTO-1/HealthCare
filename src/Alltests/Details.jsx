@@ -8,32 +8,33 @@ import { AuthContext } from "../Providers/AuthProvider";
 import UseAxiosSecure from "../CustomHook/UseAxiosSecure";
 import Swal from "sweetalert2";
 const Details = () => {
-  const {user} = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const singleTest = useLoaderData();
   const axiosSecure = UseAxiosSecure();
   const { testName, description, image, testFee, slot, date } = singleTest;
-  const handleAddReservation = () =>
-    {
-      const addReservation =
-      {
-        testName: singleTest.testName,
-        date: singleTest.date,
-        image: singleTest.image,
-        email: user.email
+  const handleAddReservation = () => {
+    const addReservation = {
+      testName: singleTest.testName,
+      date: singleTest.date,
+      image: singleTest.image,
+      email: user.email,
+    };
+    axiosSecure.post("/reservation", addReservation).then((res) => {
+      if (res.data.insertedId) {
+        Swal.fire({
+          title: "Success!",
+          text: "Appointment Taken successfully",
+          icon: "success",
+          confirmButtonText: "Okay",
+        });
       }
-      axiosSecure.post('/reservation',addReservation)
-      .then(res=>{
-        if(res.data.insertedId)
-            {
-                Swal.fire({
-                    title: "Success!",
-                    text: "Appointment Taken successfully",
-                    icon: "success",
-                    confirmButtonText: "Okay",
-                  });
-            }
-    })
-    }
+    });
+
+    axiosSecure.put(`/test/${singleTest._id}`)
+     .then((res) => {
+      console.log(res);
+     })
+  };
   return (
     <div>
       <div>
@@ -190,11 +191,11 @@ const Details = () => {
         {/* second div */}
         <div className="lg:w-2/5">
           <div className="bg-[#799f4a] px-10 py-10 mb-6">
-           <div className="flex justify-between mb-4">
-           <h2 className="text-2xl font-poppins font-bold text-white">
-              ৳ {testFee}{" "}
-            </h2>
-           </div>
+            <div className="flex justify-between mb-4">
+              <h2 className="text-2xl font-poppins font-bold text-white">
+                ৳ {testFee}{" "}
+              </h2>
+            </div>
             <p className="text-lg font-montserrat mb-4 text-white">
               We offer the best balance of price and quality in healthcare.
             </p>
@@ -230,7 +231,7 @@ const Details = () => {
               Operation{" "}
             </p>
           </div>
-          
+
           {/* <div className="bg-[#f2f2f2] px-10 py-10 mb-6">
             <h2 className="text-2xl font-poppins mb-4 font-bold">
               {" "}
@@ -247,11 +248,17 @@ const Details = () => {
               Proceed Payment{" "}
             </h2>
             <p className="text-lg font-montserrat mb-6 ">
-            Proceed to payment by selecting your preferred method, including credit cards, debit cards, electronic transfers, or cash for seamless transaction completion at our diagnostic center.
+              Proceed to payment by selecting your preferred method, including
+              credit cards, debit cards, electronic transfers, or cash for
+              seamless transaction completion at our diagnostic center.
             </p>
-            <button onClick={()=>handleAddReservation()} className="px-8 py-3 text-lg text-white font-semibold rounded bg-[#27201d] hover:bg-[#799f4a]">Pay Now</button>
+            <button
+              onClick={() => handleAddReservation()}
+              className="px-8 py-3 text-lg text-white font-semibold rounded bg-[#27201d] hover:bg-[#799f4a]"
+            >
+              Pay Now
+            </button>
           </div>
-          
         </div>
       </div>
     </div>
