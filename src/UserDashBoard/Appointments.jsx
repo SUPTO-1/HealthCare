@@ -7,7 +7,7 @@ import AppointmentCard from "./AppointmentCard";
 const Appointments = () => {
     const {user} = useContext(AuthContext);
     const axiosSecure = UseAxiosSecure();
-    const {data: reservation = []} = useQuery({
+    const {data: reservation = [] , refetch} = useQuery({
         queryKey: ["reservation", user?.email],
         queryFn: async () => {
             const res = await axiosSecure.get(`/reservation/${user.email}`);
@@ -20,7 +20,7 @@ const Appointments = () => {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 mb-10 px-0 md:px-8 lg:px-44">
                 {
                     reservation.map(singleReservation =>(
-                        <AppointmentCard key={singleReservation._id} singleReservation = {singleReservation}></AppointmentCard>
+                        <AppointmentCard key={singleReservation._id} singleReservation = {singleReservation} refetch={refetch}></AppointmentCard>
                     ))
                 }
             </div>
