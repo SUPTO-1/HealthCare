@@ -1,10 +1,10 @@
-import { IoIosMail } from "react-icons/io";
-import { LuCalendarCheck } from "react-icons/lu";
-import UseAxiosSecure from "../CustomHook/UseAxiosSecure";
 import Swal from "sweetalert2";
+import UseAxiosSecure from "../CustomHook/UseAxiosSecure";
+import { IoIosMail } from "react-icons/io";
+import { Link } from "react-router-dom";
 
-const AppointmentCard = ({singleReservation , refetch}) => {
-    const {testName , date , image , email} = singleReservation;
+const AdminReservationCard = ({singleReservation , refetch}) => {
+    const {name , userImage , email , testName} = singleReservation;
     const axiosSecure = UseAxiosSecure();
     const handleDelete = (singleReservation) => {
         Swal.fire({
@@ -23,7 +23,7 @@ const AppointmentCard = ({singleReservation , refetch}) => {
                 if (res.data.deletedCount > 0) {
                   Swal.fire(
                     "Deleted!",
-                    "Appointment has been Cancel.",
+                    "Reservation has been Cancel.",
                     "success"
                   );
                   refetch();
@@ -35,18 +35,18 @@ const AppointmentCard = ({singleReservation , refetch}) => {
     return (
         <div>
             <div className="max-w-xs lg:max-w-sm rounded-md shadow-md dark:bg-gray-50 dark:text-gray-800">
-            <img src={image} alt="" className="object-cover object-center w-full rounded-t-md h-72 dark:bg-gray-500" />
+            <img src={userImage} alt="" className="object-cover object-center w-full rounded-t-md h-72 dark:bg-gray-500" />
             <div className="flex flex-col justify-between p-0 md:p-6 space-y-8">
                 <div className="space-y-2">
-                    <h2 className="text-lg md:text-2xl text-center font-roboto font-semibold tracking-wide hover:text-[#24bca3]">{testName}</h2>
+                    <h2 className="text-lg md:text-2xl text-center font-roboto font-semibold tracking-wide hover:text-[#24bca3]">{name}</h2>
                     <p className="font-poppins pt-4 text-sm md:text-lg"><IoIosMail className="inline text-2xl" /> {email}</p>
-                    <p className="font-poppins pt-4 text-sm md:text-lg"><LuCalendarCheck className="inline text-2xl" /> {date}</p>
                 </div>
-                <button onClick={()=>handleDelete(singleReservation)} type="button" className="flex items-center justify-center w-full p-3 font-semibold tracking-wide rounded-md dark:bg-[#559797] dark:text-gray-50">Cancel Appointment</button>
+                <button onClick={()=>handleDelete(singleReservation)} type="button" className="flex items-center justify-center w-full p-1 md:p-3 font-semibold tracking-wide rounded-md dark:bg-[#559797] dark:text-gray-50">Cancel Reservation</button>
+                <Link to={`/dashboard/submitReport/${singleReservation._id}`}><button type="button" className="flex items-center justify-center w-full p-1 md:p-3 font-semibold tracking-wide rounded-md dark:bg-[#559797] dark:text-gray-50">Submit Report</button></Link>
             </div>
         </div>
         </div>
     );
 };
 
-export default AppointmentCard;
+export default AdminReservationCard;

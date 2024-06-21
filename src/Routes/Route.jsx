@@ -18,6 +18,7 @@ import UserList from "../AllUsers/UserList";
 import AdminRoute from "./AdminRoute";
 import SingleUser from "../AllUsers/SingleUser";
 import Appointments from "../UserDashBoard/Appointments";
+import AdminReservation from "../UserDashBoard/AdminReservation";
 
 const routes = createBrowserRouter([
     {
@@ -90,6 +91,10 @@ const routes = createBrowserRouter([
                     {
                         path:'appointments',
                         element:<Appointments></Appointments>
+                    },
+                    {
+                       path:"adminReservation/:testName",
+                       element:<AdminRoute><AdminReservation></AdminReservation></AdminRoute>,
                     }
                 ]
             }

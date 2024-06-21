@@ -51,6 +51,7 @@ const AllTestTable = () => {
                 <th></th>
                 <th className="text-base font-poppins">Image</th>
                 <th className="text-base font-poppins">Name</th>
+                <th className="text-base font-poppins">Reservation</th>
                 <th className="text-base font-poppins">Price</th>
                 <th className="text-base font-poppins">Slot</th>
                 <th className="text-base font-poppins">Edit</th>
@@ -72,6 +73,16 @@ const AllTestTable = () => {
                       </div>
                     </td>
                     <td>{test.testName}</td>
+                    <td>
+                      <Link to={`/dashboard/adminReservation/${test.testName}`}>
+                      <button
+                       
+                        className="btn btn-ghost btn-sm"
+                      >
+                        Show
+                      </button>
+                      </Link>
+                    </td>
                     <td>{test.testFee}</td>
                     <td> {test.slot} </td>
                     <td>

@@ -18,6 +18,8 @@ const Details = () => {
       date: singleTest.date,
       image: singleTest.image,
       email: user.email,
+      name:user.displayName,
+      userImage: user.photoURL
     };
     axiosSecure.post("/reservation", addReservation).then((res) => {
       if (res.data.insertedId) {
