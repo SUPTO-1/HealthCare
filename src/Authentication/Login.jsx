@@ -12,7 +12,7 @@ const Login = () => {
   const githubProvider = new GithubAuthProvider();
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
+  const from = location.state?.from?.pathname || "/dashboard/myProfile";
   const handleLogin = (e) => {
     e.preventDefault();
     const form = new FormData(e.target);

@@ -16,6 +16,7 @@ import Recommendation from "../Recommendation/Recommendation";
 import PrivateRoute from "./PrivateRoute";
 import UserList from "../AllUsers/UserList";
 import AdminRoute from "./AdminRoute";
+import SingleUser from "../AllUsers/SingleUser";
 
 const routes = createBrowserRouter([
     {
@@ -74,11 +75,16 @@ const routes = createBrowserRouter([
                     },
                     {
                         path:'recommendation',
-                        element:<AdminRoute><Recommendation></Recommendation></AdminRoute>
+                        element:<Recommendation></Recommendation>
                     },
                     {
                         path:'userList',
                         element:<AdminRoute><UserList></UserList></AdminRoute>
+                    },
+                    {
+                        path:'singleUser/:id',
+                        element:<AdminRoute><SingleUser></SingleUser></AdminRoute>,
+                        loader:({params})=>fetch(`http://localhost:5000/user/singleUser/${params.id}`)
                     }
                 ]
             }

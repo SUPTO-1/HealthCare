@@ -2,38 +2,35 @@ import Swal from "sweetalert2";
 import UseAxiosSecure from "../CustomHook/UseAxiosSecure";
 import addTestImg from "../assets/images/addTest.jpg";
 const Recommendation = () => {
-    const axiosSecure = UseAxiosSecure();
-  const handleAdd = (e) =>{
+  const axiosSecure = UseAxiosSecure();
+  const handleAdd = (e) => {
     e.preventDefault();
     const form = new FormData(e.target);
-    const headline = form.get('headline');
-    const recommendation = form.get('recommendation');
-    const image = form.get('imageURL');
-    const authorName = form.get('authorName');
+    const headline = form.get("headline");
+    const recommendation = form.get("recommendation");
+    const image = form.get("imageURL");
+    const authorName = form.get("authorName");
     const addRecommendation = {
-        authorName,
-        headline,
-        recommendation,
-        image
-    }
+      authorName,
+      headline,
+      recommendation,
+      image,
+    };
     //console.log(addTest);
-    axiosSecure.post('/recommendation',addRecommendation)
-    .then(res=>{
-        if(res.data.insertedId)
-            {
-                Swal.fire({
-                    title: "Success!",
-                    text: "Test added successfully",
-                    icon: "success",
-                    confirmButtonText: "Okay",
-                  });
-                  e.target.reset();
-            }
-    })
-   
-  }
-    return (
-        <div className=" md:mx-8 font-roboto lg:mt-10 lg:flex  gap-5 p-0 md:4 lg:p-0">
+    axiosSecure.post("/recommendation", addRecommendation).then((res) => {
+      if (res.data.insertedId) {
+        Swal.fire({
+          title: "Success!",
+          text: "Test added successfully",
+          icon: "success",
+          confirmButtonText: "Okay",
+        });
+        e.target.reset();
+      }
+    });
+  };
+  return (
+    <div className=" md:mx-8 font-roboto lg:mt-10 lg:flex  gap-5 p-0 md:4 lg:p-0">
       <div className="flex-1 hidden lg:block md:rounded-r-[150px] rounded-r-lg ">
         <img src={addTestImg} className="object-cover w-full h-full" alt="" />
       </div>
@@ -81,7 +78,9 @@ const Recommendation = () => {
             </div>
             <label className="form-control">
               <div className="label">
-                <span className="block text-lg font-medium text-gray-700 mb-2">Recommendation</span>
+                <span className="block text-lg font-medium text-gray-700 mb-2">
+                  Recommendation
+                </span>
               </div>
               <textarea
                 className="textarea textarea-bordered h-24 text-base focus:outline-none"
@@ -101,7 +100,7 @@ const Recommendation = () => {
         </form>
       </div>
     </div>
-    );
+  );
 };
 
 export default Recommendation;
