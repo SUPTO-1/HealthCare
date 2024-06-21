@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import AdminReservationCard from "./AdminReservationCard";
 
 const AdminReservation = () => {
-    const { testName } = useParams(); // Extract testName from params
+    const { testName } = useParams();
     const axiosSecure = UseAxiosSecure();
 
     const { data: reserved = [] , refetch } = useQuery({
