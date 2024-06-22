@@ -21,6 +21,7 @@ import Appointments from "../UserDashBoard/Appointments";
 import AdminReservation from "../UserDashBoard/AdminReservation";
 import SubmitReport from "../UserDashBoard/SubmitReport";
 import TestResults from "../Alltests/TestResults";
+import AddDoctor from "../Doctor/AddDoctor";
 
 const routes = createBrowserRouter([
     {
@@ -105,6 +106,10 @@ const routes = createBrowserRouter([
                     {
                         path:'testResults',
                         element:<TestResults></TestResults>
+                    },
+                    {
+                        path:'addDoctor',
+                        element:<AddDoctor></AddDoctor>
                     }
                 ]
             }

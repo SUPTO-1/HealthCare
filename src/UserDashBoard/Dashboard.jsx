@@ -5,7 +5,7 @@ import { FaRegCalendarCheck, FaImages, FaBars, FaArrowRight } from "react-icons/
 import { CgProfile } from "react-icons/cg";
 import { GrNotes } from "react-icons/gr";
 import { GiHypodermicTest } from "react-icons/gi";
-import { FaImage, FaUsers } from "react-icons/fa6";
+import { FaImage, FaUserDoctor, FaUsers } from "react-icons/fa6";
 import { MdAddModerator } from "react-icons/md";
 import UseAdmin from "../CustomHook/UseAdmin";
 import UseAxiosPublic from "../CustomHook/UseAxiosPublic";
@@ -193,6 +193,19 @@ const Dashboard = () => {
                   {" "}
                   <MdAddModerator className="text-sm md:text-2xl text-[#367f96]" />
                   Add Recommendation
+                </NavLink>{" "}
+              </li>
+              <li className="text-sm md:text-xl font-poppins mt-4">
+                {" "}
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? "text-[#3f41ca]" : ""
+                  }
+                  to="/dashboard/addDoctor"
+                >
+                  {" "}
+                  <FaUserDoctor className="text-sm md:text-2xl text-[#367f96]" />
+                  Add Doctor
                 </NavLink>{" "}
               </li>
             </>
