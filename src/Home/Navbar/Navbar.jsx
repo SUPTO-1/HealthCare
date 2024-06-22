@@ -60,9 +60,9 @@ const Navbar = () => {
       <li className="text-xl">
         <NavLink
           className={({ isActive }) => (isActive ? "border-b-2" : "")}
-          to="/services"
+          to="/allDoctor"
         >
-          Services
+          Doctors
         </NavLink>
       </li>
       <li className="text-xl">
