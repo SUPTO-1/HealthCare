@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import bannerImg from "../assets/images/addbanner.jpg";
 import UseAxiosSecure from "../CustomHook/UseAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 const SubmitReport = () => {
     const {id} = useParams();
     const axiosSecure = UseAxiosSecure();
-
+    const navigate = useNavigate();
     const { data: reserved = [] } = useQuery({
         queryKey: ["reservation", id],
         queryFn: async () => {
@@ -42,6 +42,8 @@ const SubmitReport = () => {
                       });
                       e.target.reset();
                 }
+                axiosSecure.delete(`/reservation/${reserved._id}`);
+                navigate('/dashboard/allTestAdmin');
         })
     }
     return (

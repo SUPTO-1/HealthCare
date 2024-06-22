@@ -20,6 +20,7 @@ import SingleUser from "../AllUsers/SingleUser";
 import Appointments from "../UserDashBoard/Appointments";
 import AdminReservation from "../UserDashBoard/AdminReservation";
 import SubmitReport from "../UserDashBoard/SubmitReport";
+import TestResults from "../Alltests/TestResults";
 
 const routes = createBrowserRouter([
     {
@@ -100,6 +101,10 @@ const routes = createBrowserRouter([
                     {
                         path:'submitReport/:id',
                         element:<SubmitReport></SubmitReport>
+                    },
+                    {
+                        path:'testResults',
+                        element:<TestResults></TestResults>
                     }
                 ]
             }
