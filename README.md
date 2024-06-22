@@ -3,8 +3,8 @@
 Welcome to the Health Checkup Portal! This web application provides a comprehensive platform for users and administrators to manage health checkups, view test results, book appointments, and much more.
 
 ## Admin Login Credentials
-- **Username:** admin
-- **Password:** admin123
+- **Username:** jahidulislamsupto@gmail.com
+- **Password:** 1234sS
 
 ## Live Site URL
 [HealthCare](https://unknown-daf67.web.app/)
