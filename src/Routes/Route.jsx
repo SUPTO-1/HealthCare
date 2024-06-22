@@ -26,11 +26,13 @@ import AllDoctor from "../Doctor/AllDoctor";
 import DoctorDetails from "../Doctor/DoctorDetails";
 import Payment from "../Payment/Payment";
 import Chart from "../Home/Chart/Chart";
+import Error from "../Error/Error";
 
 const routes = createBrowserRouter([
   {
     path: "/",
     element: <Root></Root>,
+    errorElement:<Error></Error>,
     children: [
       {
         path: "/",
