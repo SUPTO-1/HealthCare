@@ -1,4 +1,4 @@
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, PieChart, Pie, Sector, ResponsiveContainer } from "recharts";
+import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, PieChart, Pie, ResponsiveContainer } from "recharts";
 import UseAxiosPublic from "../../CustomHook/UseAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 
@@ -43,47 +43,49 @@ const Chart = () => {
   ];
 
   return (
-    <div style={{ width: "100%", height: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
-      <div style={{ width: "80%", height: "80%" }}>
-        <BarChart
-          width={800} 
-          height={500}
-          data={data}
-          margin={{
-            top: 20,
-            right: 30,
-            left: 20,
-            bottom: 5,
-          }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Bar dataKey="uv" fill="#8884d8" shape={<TriangleBar />} label={{ position: 'top' }}>
-            {data.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={entry.fill} />
-            ))}
-          </Bar>
-        </BarChart>
-      </div>
-      <div style={{ width: "30%", height: "70%", display: "flex", justifyContent: "center", alignItems: "center" }}>
-        <PieChart width={200} height={200}>
-          <Pie
-            data={pieData}
-            dataKey="value"
-            cx="50%"
-            cy="50%"
-            outerRadius={80}
-            fill="#8884d8"
-            label
+    <div className="w-full h-full my-10 lg:px-10 lg:flex gap-20">
+      <div className="w-full lg:w-3/5">
+        <h2 className="text-xl text-center font-poppins mb-6">Most Booked</h2>
+        <ResponsiveContainer width="100%" height={400}>
+          <BarChart
+            data={data}
+            margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
           >
-            {
-              pieData.map((entry, index) => (
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" />
+            <YAxis />
+            <Bar
+              dataKey="uv"
+              fill="#8884d8"
+              shape={<TriangleBar />}
+              label={{ position: 'top' }}
+            >
+              {data.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={entry.fill} />
+              ))}
+            </Bar>
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+      <div className="w-full lg:w-2/5">
+        <h2 className="text-xl text-center font-poppins mb-6">Service Ratio</h2>
+        <ResponsiveContainer width="100%" height={400}>
+          <PieChart>
+            <Pie
+              data={pieData}
+              dataKey="value"
+              cx="50%"
+              cy="50%"
+              outerRadius={80}
+              fill="#8884d8"
+              label
+            >
+              {pieData.map((entry, index) => (
                 <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
-              ))
-            }
-          </Pie>
-        </PieChart>
+              ))}
+            </Pie>
+          </PieChart>
+        </ResponsiveContainer>
       </div>
     </div>
   );
