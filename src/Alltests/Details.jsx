@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import banner from "../assets/images/operation.jpg";
 import { FaCheckToSlot, FaUserDoctor } from "react-icons/fa6";
 import { MdDateRange } from "react-icons/md";
@@ -18,8 +18,8 @@ const Details = () => {
       date: singleTest.date,
       image: singleTest.image,
       email: user.email,
-      name:user.displayName,
-      userImage: user.photoURL
+      name: user.displayName,
+      userImage: user.photoURL,
     };
     axiosSecure.post("/reservation", addReservation).then((res) => {
       if (res.data.insertedId) {
@@ -32,10 +32,9 @@ const Details = () => {
       }
     });
 
-    axiosSecure.put(`/test/${singleTest._id}`)
-     .then((res) => {
+    axiosSecure.put(`/test/${singleTest._id}`).then((res) => {
       console.log(res);
-     })
+    });
   };
   return (
     <div>
@@ -254,12 +253,14 @@ const Details = () => {
               credit cards, debit cards, electronic transfers, or cash for
               seamless transaction completion at our diagnostic center.
             </p>
-            <button
-              onClick={() => handleAddReservation()}
-              className="px-8 py-3 text-lg text-white font-semibold rounded bg-[#27201d] hover:bg-[#799f4a]"
-            >
-              Pay Now
-            </button>
+            <Link to={`/payment/${singleTest._id}`}>
+              <button
+                onClick={() => handleAddReservation()}
+                className="px-8 py-3 text-lg text-white font-semibold rounded bg-[#27201d] hover:bg-[#799f4a]"
+              >
+                Pay Now
+              </button>
+            </Link>
           </div>
         </div>
       </div>

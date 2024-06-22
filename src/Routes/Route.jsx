@@ -24,6 +24,7 @@ import TestResults from "../Alltests/TestResults";
 import AddDoctor from "../Doctor/AddDoctor";
 import AllDoctor from "../Doctor/AllDoctor";
 import DoctorDetails from "../Doctor/DoctorDetails";
+import Payment from "../Payment/Payment";
 
 const routes = createBrowserRouter([
     {
@@ -49,6 +50,11 @@ const routes = createBrowserRouter([
             {
                 path:'/details/:id',
                 element:<PrivateRoute><Details></Details></PrivateRoute>   ,
+                loader:({params})=>fetch(`http://localhost:5000/test/${params.id}`)
+            },
+            {
+                path:'payment/:id',
+                element:<Payment></Payment>,
                 loader:({params})=>fetch(`http://localhost:5000/test/${params.id}`)
             },
             {
