@@ -3,17 +3,17 @@ import logo from "../../assets/images/logo.png";
 import { useContext, } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Swal from "sweetalert2";
-import UseAxiosPublic from "../../CustomHook/UseAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
+import UseAxiosSecure from "../../CustomHook/UseAxiosSecure";
 const Navbar = () => {
   const { user, logOut, loading } = useContext(AuthContext);
-  const axiosPublic = UseAxiosPublic();
+  const axiosSecure = UseAxiosSecure();
 
   const { data: single = [] } = useQuery({
     queryKey: ["user", user?.email],
     queryFn: async () => {
       if (user) {
-        const res = await axiosPublic.get(`/user/${user.email}`);
+        const res = await axiosSecure.get(`/user/${user.email}`);
         return res.data;
       }
       return [];
@@ -68,9 +68,9 @@ const Navbar = () => {
       <li className="text-xl">
         <NavLink
           className={({ isActive }) => (isActive ? "border-b-2" : "")}
-          to="/contact"
+          to="/chart"
         >
-          Contact
+          Chart
         </NavLink>
       </li>
       {

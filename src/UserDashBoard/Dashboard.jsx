@@ -4,19 +4,18 @@ import { NavLink, Outlet } from "react-router-dom";
 import { FaRegCalendarCheck, FaImages, FaBars, FaArrowRight } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 import { GrNotes } from "react-icons/gr";
-import { GiHypodermicTest } from "react-icons/gi";
 import { FaImage, FaUserDoctor, FaUsers } from "react-icons/fa6";
 import { MdAddModerator } from "react-icons/md";
 import UseAdmin from "../CustomHook/UseAdmin";
-import UseAxiosPublic from "../CustomHook/UseAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
+import UseAxiosSecure from "../CustomHook/UseAxiosSecure";
 
 const Dashboard = () => {
   const { user, loading } = useContext(AuthContext);
   const [displayName, setDisplayName] = useState("");
   const [photoURL, setPhotoURL] = useState("");
   const [isAdmin] = UseAdmin();
-  const axiosPublic = UseAxiosPublic();
+  const axiosSecure = UseAxiosSecure();
   const handleSidebar = () => {
     document.getElementById("my-drawer-2").checked = false;
   };
@@ -25,7 +24,7 @@ const Dashboard = () => {
     queryKey: ["user", user?.email],
     queryFn: async () => {
       if (user) {
-        const res = await axiosPublic.get(`/user/${user.email}`);
+        const res = await axiosSecure.get(`/user/${user.email}`);
         return res.data;
       }
       return [];

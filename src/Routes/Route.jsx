@@ -25,6 +25,7 @@ import AddDoctor from "../Doctor/AddDoctor";
 import AllDoctor from "../Doctor/AllDoctor";
 import DoctorDetails from "../Doctor/DoctorDetails";
 import Payment from "../Payment/Payment";
+import Chart from "../Home/Chart/Chart";
 
 const routes = createBrowserRouter([
     {
@@ -65,6 +66,10 @@ const routes = createBrowserRouter([
                 path:'/doctorDetails/:id',
                 element:<PrivateRoute> <DoctorDetails></DoctorDetails> </PrivateRoute>,
                 loader:({params})=>fetch(`http://localhost:5000/doctor/${params.id}`)
+            },
+            {
+                path:'/chart',
+                element:<Chart></Chart>
             },
             {
                 path:'dashboard',

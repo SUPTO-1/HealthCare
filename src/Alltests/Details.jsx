@@ -21,16 +21,7 @@ const Details = () => {
       name: user.displayName,
       userImage: user.photoURL,
     };
-    axiosSecure.post("/reservation", addReservation).then((res) => {
-      if (res.data.insertedId) {
-        Swal.fire({
-          title: "Success!",
-          text: "Appointment Taken successfully",
-          icon: "success",
-          confirmButtonText: "Okay",
-        });
-      }
-    });
+    axiosSecure.post("/reservation", addReservation)
 
     axiosSecure.put(`/test/${singleTest._id}`).then((res) => {
       console.log(res);
