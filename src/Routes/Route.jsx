@@ -23,6 +23,7 @@ import SubmitReport from "../UserDashBoard/SubmitReport";
 import TestResults from "../Alltests/TestResults";
 import AddDoctor from "../Doctor/AddDoctor";
 import AllDoctor from "../Doctor/AllDoctor";
+import DoctorDetails from "../Doctor/DoctorDetails";
 
 const routes = createBrowserRouter([
     {
@@ -53,6 +54,11 @@ const routes = createBrowserRouter([
             {
                 path:'/allDoctor',
                 element:<AllDoctor></AllDoctor>
+            },
+            {
+                path:'/doctorDetails/:id',
+                element:<PrivateRoute> <DoctorDetails></DoctorDetails> </PrivateRoute>,
+                loader:({params})=>fetch(`http://localhost:5000/doctor/${params.id}`)
             },
             {
                 path:'dashboard',
