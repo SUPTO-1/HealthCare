@@ -20,9 +20,7 @@ const Checkoutform = ({singleTest}) => {
 
    const [clientSecret,setClientSecret] = useState('');
    const [transactionsId,setTransactionId] = useState('')
-   //const [cart,refetch] = useCart();
    const axiosSecure = UseAxiosSecure();
-   //const totalPrice = cart?.reduce((total,item)=>total+item.price,0)
    const totalPrice = testFee;
 
 
