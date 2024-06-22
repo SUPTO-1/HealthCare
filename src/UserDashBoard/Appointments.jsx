@@ -7,13 +7,19 @@ import AppointmentCard from "./AppointmentCard";
 const Appointments = () => {
     const {user} = useContext(AuthContext);
     const axiosSecure = UseAxiosSecure();
-    const {data: reservation = [] , refetch} = useQuery({
+    const {data: reservation = [] , refetch , isLoading} = useQuery({
         queryKey: ["reservation", user?.email],
         queryFn: async () => {
             const res = await axiosSecure.get(`/reservation/${user.email}`);
             return res.data;
         }
     })
+    if(isLoading)
+        {
+            return <div className="flex justify-center items-center h-screen">
+                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-gray-200"></div>
+            </div>
+        }
     return (
         <div>
             <h2 className="text-2xl text-center mt-10 font-poppins mb-10">My Upcoming Appointments</h2>
