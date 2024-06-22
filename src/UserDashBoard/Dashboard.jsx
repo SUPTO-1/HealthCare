@@ -116,6 +116,20 @@ const Dashboard = () => {
                   Test Results
                 </NavLink>{" "}
               </li>
+              <div className="divider"></div>
+              <li className="text-sm md:text-xl font-poppins mt-4">
+                {" "}
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? "text-[#3f41ca]" : ""
+                  }
+                  to="/dashboard/userList"
+                >
+                  {" "}
+                  <FaUsers className="text-sm md:text-2xl text-[#367f96]" />
+                  User List
+                </NavLink>{" "}
+              </li>
               <li className="text-sm md:text-xl font-poppins mt-4">
                 {" "}
                 <NavLink
@@ -179,19 +193,6 @@ const Dashboard = () => {
                   {" "}
                   <MdAddModerator className="text-sm md:text-2xl text-[#367f96]" />
                   Add Recommendation
-                </NavLink>{" "}
-              </li>
-              <li className="text-sm md:text-xl font-poppins mt-4">
-                {" "}
-                <NavLink
-                  className={({ isActive }) =>
-                    isActive ? "text-[#3f41ca]" : ""
-                  }
-                  to="/dashboard/userList"
-                >
-                  {" "}
-                  <FaUsers className="text-sm md:text-2xl text-[#367f96]" />
-                  User List
                 </NavLink>{" "}
               </li>
             </>
