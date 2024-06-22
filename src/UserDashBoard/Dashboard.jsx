@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Providers/AuthProvider";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Navigate, Outlet} from "react-router-dom";
 import { FaRegCalendarCheck, FaImages, FaBars, FaArrowRight } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 import { GrNotes } from "react-icons/gr";
@@ -39,6 +39,10 @@ const Dashboard = () => {
   if (loading) {
     return;
   }
+  if(single.status === 'blocked')
+    {
+      return <Navigate to="/" />;
+    }
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />

@@ -4,6 +4,7 @@ import { FaTrash } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import { jsPDF } from "jspdf";
+import { MdBlock } from "react-icons/md";
 const UserList = () => {
   const axiosSecure = UseAxiosSecure();
   const { data: user = [], refetch } = useQuery({
@@ -29,6 +30,30 @@ const UserList = () => {
             Swal.fire({
               title: "Updated!",
               text: "User have been updated to Admin",
+              icon: "success",
+            });
+            refetch();
+          }
+        });
+      }
+    });
+  };
+  const handleBlock = (single) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You want him to block?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, change it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.patch(`/user/block/${single._id}`).then((res) => {
+          if (res.data.modifiedCount > 0) {
+            Swal.fire({
+              title: "Updated!",
+              text: "User have been blocked",
               icon: "success",
             });
             refetch();
@@ -117,10 +142,17 @@ const UserList = () => {
                       )}
                     </td>
                     <td>
-                      <button className="btn btn-ghost btn-xs">
-                        {" "}
-                        <FaTrash className="text-lg text-red-600"></FaTrash>{" "}
-                      </button>
+                      {single.status === "blocked" ? (
+                        "Blocked"
+                      ) : (
+                        <button
+                          onClick={() => handleBlock(single)}
+                          className="btn btn-ghost btn-xs"
+                        >
+                          {" "}
+                          <MdBlock className="text-lg text-red-600"></MdBlock>{" "}
+                        </button>
+                      )}
                     </td>
                     <td>
                       <button

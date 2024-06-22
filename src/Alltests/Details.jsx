@@ -1,4 +1,4 @@
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, Navigate, useLoaderData } from "react-router-dom";
 import banner from "../assets/images/operation.jpg";
 import { FaCheckToSlot, FaUserDoctor } from "react-icons/fa6";
 import { MdDateRange } from "react-icons/md";
@@ -6,12 +6,22 @@ import { IoMdCheckmark } from "react-icons/io";
 import { useContext } from "react";
 import { AuthContext } from "../Providers/AuthProvider";
 import UseAxiosSecure from "../CustomHook/UseAxiosSecure";
-import Swal from "sweetalert2";
+import { useQuery } from "@tanstack/react-query";
 const Details = () => {
   const { user } = useContext(AuthContext);
   const singleTest = useLoaderData();
   const axiosSecure = UseAxiosSecure();
   const { testName, description, image, testFee, slot, date } = singleTest;
+  const { data: single = [] } = useQuery({
+    queryKey: ["user", user?.email],
+    queryFn: async () => {
+      if (user) {
+        const res = await axiosSecure.get(`/user/${user.email}`);
+        return res.data;
+      }
+      return [];
+    },
+  });
   const handleAddReservation = () => {
     const addReservation = {
       testName: singleTest.testName,
@@ -27,6 +37,13 @@ const Details = () => {
       console.log(res);
     });
   };
+  if(single.status === 'blocked')
+    {
+      if(single.status === 'blocked')
+        {
+          return <Navigate to="/" />;
+        }
+    }
   return (
     <div>
       <div>
