@@ -58,13 +58,13 @@ const routes = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`https://unknown-server-seven.vercel.app/test/${params.id}`),
+          fetch(`http://localhost:5000//test/${params.id}`),
       },
       {
         path: "payment/:id",
         element: <Payment></Payment>,
         loader: ({ params }) =>
-          fetch(`https://unknown-server-seven.vercel.app/test/${params.id}`),
+          fetch(`http://localhost:5000//test/${params.id}`),
       },
       {
         path: "/allDoctor",
@@ -79,7 +79,7 @@ const routes = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`https://unknown-server-seven.vercel.app/doctor/${params.id}`),
+          fetch(`http://localhost:5000//doctor/${params.id}`),
       },
       {
         path: "/chart",
@@ -137,7 +137,7 @@ const routes = createBrowserRouter([
               </AdminRoute>
             ),
             loader: ({ params }) =>
-              fetch(`https://unknown-server-seven.vercel.app/test/${params.id}`),
+              fetch(`http://localhost:5000//test/${params.id}`),
           },
           {
             path: "recommendation",
@@ -159,7 +159,7 @@ const routes = createBrowserRouter([
               </AdminRoute>
             ),
             loader: ({ params }) =>
-              fetch(`https://unknown-server-seven.vercel.app/user/singleUser/${params.id}`),
+              fetch(`http://localhost:5000//user/singleUser/${params.id}`),
           },
           {
             path: "appointments",

@@ -38,6 +38,30 @@ const UserList = () => {
       }
     });
   };
+  const handleMakeUser = (single) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You want him to make User?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, change it!",
+    }).then((result)=>{
+      if(result.isConfirmed){
+        axiosSecure.patch(`/user/user/${single._id}`).then((res)=>{
+          if(res.data.modifiedCount > 0){
+            Swal.fire({
+              title: "Updated!",
+              text: "User have been updated to User",
+              icon: "success",
+            });
+            refetch();
+          }
+        })
+      }
+    })
+  }
   const handleBlock = (single) => {
     Swal.fire({
       title: "Are you sure?",
@@ -62,6 +86,31 @@ const UserList = () => {
       }
     });
   };
+
+  const handleUnBlock = (single) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You want him to Unblock?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, change it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.patch(`/user/unblock/${single._id}`).then((res) => {
+          if (res.data.modifiedCount > 0) {
+            Swal.fire({
+              title: "Updated!",
+              text: "User have been blocked",
+              icon: "success",
+            });
+            refetch();
+          }
+        });
+      }
+    });
+  }
   const handleDownloadPdf = (single) => {
     const doc = new jsPDF();
     let yPos = 15;
@@ -131,11 +180,11 @@ const UserList = () => {
                     </td>
                     <td>
                       {single.role === "admin" ? (
-                        "Admin"
+                        <button onClick={() => handleMakeUser(single)} className="btn btn-ghost btn-xs hover:bg-green-500 ">Admin</button>
                       ) : (
                         <button
                           onClick={() => handleMakeAdmin(single)}
-                          className="btn btn-ghost btn-xs"
+                          className="btn btn-ghost btn-xs hover:bg-red-600"
                         >
                           User
                         </button>
@@ -143,14 +192,18 @@ const UserList = () => {
                     </td>
                     <td>
                       {single.status === "blocked" ? (
-                        "Blocked"
+                       <button onClick={() => handleUnBlock(single)}
+                       className="bt btn-ghost btn-xs"
+                     >
+                       {" "}
+                       <MdBlock className="text-lg text-red-600"></MdBlock>{" "}
+                     </button>
                       ) : (
                         <button
                           onClick={() => handleBlock(single)}
-                          className="btn btn-ghost btn-xs"
+                          className="btn text-white btn-ghost bg-green-600 btn-xs"
                         >
-                          {" "}
-                          <MdBlock className="text-lg text-red-600"></MdBlock>{" "}
+                          Active
                         </button>
                       )}
                     </td>
