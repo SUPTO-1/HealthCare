@@ -61,3 +61,34 @@ Welcome to the Health Checkup Portal! This web application provides a comprehens
 ### Prerequisites
 - Node.js
 - npm or yarn
+
+### Installation
+
+1. **Clone the repository:**
+    ```bash
+    git clone https://github.com/yourusername/health-checkup-portal.git](https://github.com/SUPTO-1/HealthCare_Client.git
+    ```
+
+2. **Navigate to the project directory:**
+    ```bash
+    cd health-checkup-portal
+    ```
+
+3. **Install dependencies:**
+    ```bash
+    npm install
+    ```
+
+4. **Start the development server:**
+    ```bash
+    npm start
+    ```
+
+5. **Open your browser and navigate to:**
+    ```plaintext
+    http://localhost:3000
+    ```
+
+### Deployment
+
+For deployment instructions, refer to the specific hosting provider's documentation. Ensure environment variables are correctly set for production.
