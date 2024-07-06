@@ -1,6 +1,6 @@
-# Health Checkup Portal
+# HealthCare
 
-Welcome to the Health Checkup Portal! This web application provides a comprehensive platform for users and administrators to manage health checkups, view test results, book appointments, and much more.
+Welcome to the HealthCare! This web application provides a comprehensive platform for users and administrators to manage health checkups, view test results, book appointments, and much more.
 
 ## Admin Login Credentials
 - **Username:** jahidulislamsupto@gmail.com
